@@ -3,7 +3,7 @@
 ## Project 6 OpenClassrooms - Build a secure API for a food review application.
 ***
 ### Installation FrontEnd :
-
+***
 *You will need NodeJS version 12.14 or 14.0 to run the frontend part.
 
 *Clone the front-end project on https://github.com/OpenClassrooms-Student-Center/dwj-projet6.
