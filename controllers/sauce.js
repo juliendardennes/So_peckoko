@@ -84,3 +84,59 @@ exports.getAllSauce = (req, res, next) => {
       });
     });
 };
+
+//----------------------------------------------------------------
+// Aime ou n'aime pas une sauce
+exports.likeDislikeSauce = (req, res, next) => {
+  const isUserLike = new Sauce({
+    likes: req.body.like,
+    userId: req.body.userId,
+  });
+  Sauce.findOne({
+    _id: req.params.id,
+  })
+    .then((sauce) => {
+      Sauce.updateOne({ _id: req.params.id }, sauce);
+      //Si l'utilisateur veut aimer.
+      if (
+        isUserLike.likes === 1 &&
+        !sauce.usersLiked.includes(isUserLike.userId)
+      ) {
+        sauce.likes = sauce.likes + 1;
+        sauce.usersLiked.push(isUserLike.userId);
+      }
+      //Si l'utilisateur veut supprimer j'aime ou n'aime pas.
+      else if (isUserLike.likes === 0) {
+        //Si l'utilisateur aime déjà la sauce et souhaite supprimer comme.
+        if (sauce.usersLiked.includes(isUserLike.userId)) {
+          let userLikedSauce = sauce.usersLiked.indexOf(isUserLike.userId);
+          sauce.likes = sauce.likes - 1;
+          sauce.usersLiked.splice(userLikedSauce, 1);
+        }
+        //Si l'utilisateur n'aime déjà pas la sauce et souhaite supprimer.
+        if (sauce.usersDisliked.includes(isUserLike.userId)) {
+          let userDislikedSauce = sauce.usersDisliked.indexOf(
+            isUserLike.userId
+          );
+          sauce.dislikes = sauce.dislikes - 1;
+          sauce.usersDisliked.splice(userDislikedSauce, 1);
+        }
+      }
+      //Si l'utilisateur ne veut pas aimer.
+      else if (
+        isUserLike.likes === -1 &&
+        !sauce.usersDisliked.includes(isUserLike.userId)
+      ) {
+        sauce.dislikes = sauce.dislikes + 1;
+        sauce.usersDisliked.push(isUserLike.userId);
+      }
+      sauce.save(sauce);
+      res.status(200).json(sauce);
+    })
+    .catch((error) => {
+      res.status(404).json({
+        error: error,
+      });
+    });
+};
+// ---------------------------------------------------------------

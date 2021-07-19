@@ -31,4 +31,7 @@ router.get("/:id", auth, sauceCtrl.getOneSauce);
 //---le tableau de toutes les sauces dans la base de données---
 router.get("/", auth, sauceCtrl.getAllSauce);
 
+//route pour aimer ou ne pas aimer une sauce
+router.post("/:id/like", auth, sauceCtrl.likeDislikeSauce);
+
 module.exports = router;
