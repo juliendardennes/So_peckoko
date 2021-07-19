@@ -22,10 +22,8 @@
 
 1- Clone the back-end project on https://github.com/juliendardennes/juliendardennes_6_10072021.git.
 
-2- Create .env file in the "backend" folder, then, add the line of code sent separately.
+2- With a terminal, go to the "backend" folder then: npm install and run nodemon.
 
-3- With a terminal, go to the "backend" folder then: npm install and run nodemon.
-
-4- The server listens on the port: http://localhost:3000.
+3- The server listens on the port: http://localhost:3000.
 
 
