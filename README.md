@@ -20,7 +20,7 @@
 ***
 ### Installation backEnd : 
 
-1- Clone the back-end project on https://github.com/PingrisAlexis/PingrisAlexis_06_29052021.git.
+1- Clone the back-end project on https://github.com/juliendardennes/juliendardennes_6_10072021.git.
 
 2- Create .env file in the "backend" folder, then, add the line of code sent separately.
 
