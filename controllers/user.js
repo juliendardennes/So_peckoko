@@ -1,3 +1,5 @@
+const MD5 = require("crypto-js/md5");
+
 //---Importer le package Bcrypt : pour hacher le mot de passe---
 const bcrypt = require("bcrypt");
 
@@ -14,7 +16,7 @@ exports.signup = (req, res, next) => {
     .hash(req.body.password, 10)
     .then((hash) => {
       const user = new User({
-        email: req.body.email,
+        email: MD5(req.body.email).toString(),
         password: hash,
       });
       user
@@ -28,7 +30,7 @@ exports.signup = (req, res, next) => {
 //---Middleware pour connecter un compte utilisateur---
 //---déjà existant dans la base de données---
 exports.login = (req, res, next) => {
-  User.findOne({ email: req.body.email })
+  User.findOne({ email: MD5(req.body.email).toString() })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });
