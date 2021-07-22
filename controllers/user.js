@@ -1,3 +1,4 @@
+//---importer le package crypto-js : pour hacher l'email---
 const MD5 = require("crypto-js/md5");
 
 //---Importer le package Bcrypt : pour hacher le mot de passe---
